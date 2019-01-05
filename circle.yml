@@ -1,6 +1,22 @@
-# circle.yml
-machine:
-  node:
-    version: 10.7.0
+version: 2
+
+jobs:
+  build:
+    docker:
+      - image: circleci/golang:1.8.1
+    steps:
+      - checkout
+      - run: echo "master"
   test:
-    - npm test
+    docker:
+      - image: circleci/golang:1.8.1
+    steps:
+      - checkout
+      - run: echo "hello world"
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - test
+
